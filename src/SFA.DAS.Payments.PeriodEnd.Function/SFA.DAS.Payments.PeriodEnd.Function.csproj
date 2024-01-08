@@ -7,11 +7,9 @@
 	  <PackageReference Include="AzureFunctions.Autofac" Version="4.0.1" />
 	  <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Http" Version="3.0.2" />
 	  <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.9" />
+	  <PackageReference Include="SFA.DAS.Payments.Application" Version="2.1.2-CI-20231220-111647" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SFA.DAS.Payments.PeriodEnd.Application\SFA.DAS.Payments.PeriodEnd.Application.csproj" />
-  </ItemGroup>
-  <ItemGroup>
+	<ItemGroup>
     <None Update="host.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

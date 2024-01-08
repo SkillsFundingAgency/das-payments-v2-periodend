@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.Payments.PeriodEnd.PeriodEndService", "SFA.DAS.Payments.PeriodEnd.PeriodEndService\SFA.DAS.Payments.PeriodEnd.PeriodEndService.csproj", "{009190F6-8A4E-469B-8298-5CCFB4CB75A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.Payments.PeriodEnd.Model", "SFA.DAS.Payments.PeriodEnd.Model\SFA.DAS.Payments.PeriodEnd.Model.csproj", "{6E5F9144-CF34-4CB0-B810-F921ED30DE3D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.Payments.PeriodEnd.Messages.Internal", "SFA.DAS.Payments.PeriodEnd.Messages.Internal\SFA.DAS.Payments.PeriodEnd.Messages.Internal.csproj", "{8BE20CE4-1991-43C0-B48A-FF7F62C11CAA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.Payments.PeriodEnd.Messages", "SFA.DAS.Payments.PeriodEnd.Messages\SFA.DAS.Payments.PeriodEnd.Messages.csproj", "{4570B681-7844-4232-905D-8C79939840FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.Payments.PeriodEnd.Function", "SFA.DAS.Payments.PeriodEnd.Function\SFA.DAS.Payments.PeriodEnd.Function.csproj", "{149BCD7E-38A2-447D-AFC5-7C6D33EA6245}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.Payments.PeriodEnd.Data", "SFA.DAS.Payments.PeriodEnd.Data\SFA.DAS.Payments.PeriodEnd.Data.csproj", "{EFFDE17A-34D4-4305-96A9-76CC0459537C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.Payments.PeriodEnd.Application.UnitTests", "SFA.DAS.Payments.PeriodEnd.Application.UnitTests\SFA.DAS.Payments.PeriodEnd.Application.UnitTests.csproj", "{B3945051-3407-4497-9724-DE527DDC0332}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.Payments.PeriodEnd.Application", "SFA.DAS.Payments.PeriodEnd.Application\SFA.DAS.Payments.PeriodEnd.Application.csproj", "{96E806EB-3AFD-4302-83BE-F5384A342A0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Payments.PeriodEnd.AcceptanceTests", "SFA.DAS.Payments.PeriodEnd.AcceptanceTests\SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj", "{F1D98626-5EF1-4F53-BA55-57EFA9ED7732}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{009190F6-8A4E-469B-8298-5CCFB4CB75A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{009190F6-8A4E-469B-8298-5CCFB4CB75A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{009190F6-8A4E-469B-8298-5CCFB4CB75A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{009190F6-8A4E-469B-8298-5CCFB4CB75A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E5F9144-CF34-4CB0-B810-F921ED30DE3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E5F9144-CF34-4CB0-B810-F921ED30DE3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E5F9144-CF34-4CB0-B810-F921ED30DE3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E5F9144-CF34-4CB0-B810-F921ED30DE3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BE20CE4-1991-43C0-B48A-FF7F62C11CAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BE20CE4-1991-43C0-B48A-FF7F62C11CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BE20CE4-1991-43C0-B48A-FF7F62C11CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BE20CE4-1991-43C0-B48A-FF7F62C11CAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4570B681-7844-4232-905D-8C79939840FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4570B681-7844-4232-905D-8C79939840FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4570B681-7844-4232-905D-8C79939840FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4570B681-7844-4232-905D-8C79939840FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{149BCD7E-38A2-447D-AFC5-7C6D33EA6245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{149BCD7E-38A2-447D-AFC5-7C6D33EA6245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{149BCD7E-38A2-447D-AFC5-7C6D33EA6245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{149BCD7E-38A2-447D-AFC5-7C6D33EA6245}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFFDE17A-34D4-4305-96A9-76CC0459537C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFFDE17A-34D4-4305-96A9-76CC0459537C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFFDE17A-34D4-4305-96A9-76CC0459537C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFFDE17A-34D4-4305-96A9-76CC0459537C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3945051-3407-4497-9724-DE527DDC0332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3945051-3407-4497-9724-DE527DDC0332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3945051-3407-4497-9724-DE527DDC0332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3945051-3407-4497-9724-DE527DDC0332}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96E806EB-3AFD-4302-83BE-F5384A342A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96E806EB-3AFD-4302-83BE-F5384A342A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96E806EB-3AFD-4302-83BE-F5384A342A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96E806EB-3AFD-4302-83BE-F5384A342A0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1D98626-5EF1-4F53-BA55-57EFA9ED7732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1D98626-5EF1-4F53-BA55-57EFA9ED7732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1D98626-5EF1-4F53-BA55-57EFA9ED7732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1D98626-5EF1-4F53-BA55-57EFA9ED7732}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61773990-BCD9-48DB-B35A-C4BBDAA9FBAC}
+	EndGlobalSection
+EndGlobal
