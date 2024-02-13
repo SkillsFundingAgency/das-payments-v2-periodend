@@ -2,15 +2,15 @@
 using System.Threading.Tasks;
 using NServiceBus;
 using SFA.DAS.Payments.Application.Infrastructure.Logging;
-using SFA.DAS.Payments.Monitoring.Jobs.Messages.Events;
+using SFA.DAS.Payments.Monitoring.Jobs.DataMessages.Events;
 using SFA.DAS.Payments.PeriodEnd.Application.Repositories;
 
 namespace SFA.DAS.Payments.PeriodEnd.Application.Handlers
 {
-    class SubmissionSucceededHandler : IHandleMessages<SubmissionJobSucceeded>
+    internal class SubmissionSucceededHandler : IHandleMessages<SubmissionJobSucceeded>
     {
-        private readonly IProvidersRequiringReprocessingRepository repository;
         private readonly IPaymentLogger logger;
+        private readonly IProvidersRequiringReprocessingRepository repository;
 
         public SubmissionSucceededHandler(IProvidersRequiringReprocessingRepository repository, IPaymentLogger logger)
         {

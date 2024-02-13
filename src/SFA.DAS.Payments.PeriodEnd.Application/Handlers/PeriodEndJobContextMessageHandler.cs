@@ -1,40 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using ESFA.DC.JobContextManager.Interface;
 using ESFA.DC.JobContextManager.Model;
 using NServiceBus;
 using SFA.DAS.Payments.Application.Infrastructure.Logging;
 using SFA.DAS.Payments.Application.Messaging;
 using SFA.DAS.Payments.Core;
-using SFA.DAS.Payments.JobContextMessageHandling.Infrastructure;
-using SFA.DAS.Payments.JobContextMessageHandling.JobStatus;
 using SFA.DAS.Payments.Model.Core;
 using SFA.DAS.Payments.Monitoring.Jobs.Client;
 using SFA.DAS.Payments.Monitoring.Jobs.Data;
-using SFA.DAS.Payments.Monitoring.Jobs.Messages.Commands;
+using SFA.DAS.Payments.Monitoring.Jobs.DataMessages.Commands;
 using SFA.DAS.Payments.Monitoring.Jobs.Model;
 using SFA.DAS.Payments.PeriodEnd.Messages.Events;
 using SFA.DAS.Payments.PeriodEnd.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace SFA.DAS.Payments.PeriodEnd.Application.Handlers
 {
     public class PeriodEndJobContextMessageHandler : IMessageHandler<JobContextMessage>
     {
-        private readonly IPaymentLogger logger;
         private readonly IEndpointInstanceFactory endpointInstanceFactory;
         private readonly IPeriodEndJobClient jobClient;
-        private readonly IJobStatusService jobStatusService;
         private readonly IJobsDataContext jobsDataContext;
+        private readonly IJobStatusService jobStatusService;
+        private readonly IPaymentLogger logger;
 
         public PeriodEndJobContextMessageHandler(IPaymentLogger logger,
-            IEndpointInstanceFactory endpointInstanceFactory, IPeriodEndJobClient jobClient, IJobStatusService jobStatusService, IJobsDataContext jobsDataContext)
+            IEndpointInstanceFactory endpointInstanceFactory, IPeriodEndJobClient jobClient,
+            IJobStatusService jobStatusService, IJobsDataContext jobsDataContext)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.endpointInstanceFactory = endpointInstanceFactory ??
-                                            throw new ArgumentNullException(nameof(endpointInstanceFactory));
+                                           throw new ArgumentNullException(nameof(endpointInstanceFactory));
             this.jobClient = jobClient ?? throw new ArgumentNullException(nameof(jobClient));
             this.jobStatusService = jobStatusService ?? throw new ArgumentNullException(nameof(jobStatusService));
             this.jobsDataContext = jobsDataContext ?? throw new ArgumentNullException(nameof(jobsDataContext));
@@ -52,8 +51,10 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.Handlers
                 periodEndEvent.JobId = message.JobId;
                 periodEndEvent.CollectionPeriod = new CollectionPeriod
                 {
-                    AcademicYear = Convert.ToInt16(GetMessageValue(message, JobContextMessageConstants.KeyValuePairs.CollectionYear)),
-                    Period = Convert.ToByte(GetMessageValue(message, JobContextMessageConstants.KeyValuePairs.ReturnPeriod))
+                    AcademicYear = Convert.ToInt16(GetMessageValue(message,
+                        JobContextMessageConstants.KeyValuePairs.CollectionYear)),
+                    Period = Convert.ToByte(GetMessageValue(message,
+                        JobContextMessageConstants.KeyValuePairs.ReturnPeriod))
                 };
 
                 logger.LogDebug($"Got period end event: {periodEndEvent.ToJson()}");
@@ -86,7 +87,8 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.Handlers
                     else
                     {
                         jobIdToWaitFor = existingNonFailedJobId.GetValueOrDefault();
-                        logger.LogWarning($"Job already exists, will not be published. Name: {periodEndEvent.GetType().Name}, JobId: {periodEndEvent.JobId}, Collection Period: {periodEndEvent.CollectionPeriod.Period}-{periodEndEvent.CollectionPeriod.AcademicYear}.");
+                        logger.LogWarning(
+                            $"Job already exists, will not be published. Name: {periodEndEvent.GetType().Name}, JobId: {periodEndEvent.JobId}, Collection Period: {periodEndEvent.CollectionPeriod.Period}-{periodEndEvent.CollectionPeriod.AcademicYear}.");
                     }
                 }
 

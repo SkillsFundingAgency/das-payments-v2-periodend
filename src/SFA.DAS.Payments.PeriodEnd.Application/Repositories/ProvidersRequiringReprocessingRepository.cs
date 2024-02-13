@@ -13,9 +13,9 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.Repositories
     public interface IProvidersRequiringReprocessingRepository
     {
         Task Remove(long ukprn);
-        
+
         /// <summary>
-        /// This method will add the UKPRN to the table if it does not exist and ignore the new record if
+        ///     This method will add the UKPRN to the table if it does not exist and ignore the new record if
         ///     an existing record already exists with the same UKPRN. The unique index has IGNORE_DUP_KEY
         ///     set
         /// </summary>
@@ -56,10 +56,10 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.Repositories
             var isUkprnAlreadyAdded = await dataContext.ProvidersRequiringReprocessing.AnyAsync(x => x.Ukprn == ukprn);
 
             if (isUkprnAlreadyAdded) return;
-            
+
             var record = new ProviderRequiringReprocessingEntity
             {
-                Ukprn = ukprn,
+                Ukprn = ukprn
             };
             await dataContext.ProvidersRequiringReprocessing.AddAsync(record);
             await dataContext.SaveChangesAsync();
@@ -76,10 +76,12 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.Repositories
             return providers;
         }
 
-        public async Task<List<LatestSuccessfulJobModel>> GetLatestSuccessfulJobs(short academicYear, byte collectionPeriod)
+        public async Task<List<LatestSuccessfulJobModel>> GetLatestSuccessfulJobs(short academicYear,
+            byte collectionPeriod)
         {
-            logger.LogDebug($"Getting latest successful jobs for Academic Year: {academicYear} and Collection Period: {collectionPeriod}");
-            
+            logger.LogDebug(
+                $"Getting latest successful jobs for Academic Year: {academicYear} and Collection Period: {collectionPeriod}");
+
             logger.LogInfo("Finished getting latest successful jobs");
             return await dataContext.LatestSuccessfulJobs
                 .Where(x =>
