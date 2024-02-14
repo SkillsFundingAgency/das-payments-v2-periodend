@@ -1,9 +1,4 @@
-﻿using System.Net.Http;
-using Autofac;
-using NServiceBus;
-using SFA.DAS.Payments.AcceptanceTests.Core;
-using SFA.DAS.Payments.AcceptanceTests.Core.Automation;
-using SFA.DAS.Payments.AcceptanceTests.Core.Data;
+﻿using NServiceBus;
 using SFA.DAS.Payments.PeriodEnd.Messages.Events;
 using TechTalk.SpecFlow;
 
@@ -30,8 +25,10 @@ namespace SFA.DAS.Payments.PeriodEnd.AcceptanceTests.Infrastructure
         [AfterScenario]
         public static void DeleteJobs()
         {
-            Container.Resolve<TestPaymentsDataContext>().ClearJobFromDcJobId(ScenarioContext.Current.Get<TestSession>().JobId);
-            Container.Resolve<TestPaymentsDataContext>().ClearJobFromDcJobId(ScenarioContext.Current.Get<TestSession>().DuplicateJobId);
+            Container.Resolve<TestPaymentsDataContext>()
+                .ClearJobFromDcJobId(ScenarioContext.Current.Get<TestSession>().JobId);
+            Container.Resolve<TestPaymentsDataContext>()
+                .ClearJobFromDcJobId(ScenarioContext.Current.Get<TestSession>().DuplicateJobId);
         }
     }
 }
