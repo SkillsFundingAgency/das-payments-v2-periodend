@@ -29,7 +29,7 @@ namespace SFA.DAS.Payments.PeriodEnd.PeriodEndService
         {
             return new List<ServiceInstanceListener>
             {
-                new ServiceInstanceListener(context =>lifetimeScope.Resolve<IStatelessEndpointCommunicationListener>())
+                new ServiceInstanceListener(context => lifetimeScope.Resolve<IStatelessEndpointCommunicationListener>())
             };
         }
 

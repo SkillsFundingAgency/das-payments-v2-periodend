@@ -9,6 +9,8 @@ using NServiceBus;
 using SFA.DAS.Payments.Application.Infrastructure.Logging;
 using SFA.DAS.Payments.Application.Messaging;
 using SFA.DAS.Payments.Core;
+using SFA.DAS.Payments.JobContextMessageHandling.Infrastructure;
+using SFA.DAS.Payments.JobContextMessageHandling.JobStatus;
 using SFA.DAS.Payments.Model.Core;
 using SFA.DAS.Payments.Monitoring.Jobs.Client;
 using SFA.DAS.Payments.Monitoring.Jobs.Data;
