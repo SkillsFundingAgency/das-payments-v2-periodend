@@ -214,11 +214,14 @@
     <Reference Include="SFA.DAS.Payments.Messages.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Payments.Messages.Common.1.1.0\lib\netstandard2.0\SFA.DAS.Payments.Messages.Common.dll</HintPath>
     </Reference>
+    <Reference Include="SFA.DAS.Payments.Messages.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Payments.Monitoring.Jobs.Messages.0.0.14\lib\netstandard2.0\SFA.DAS.Payments.Messages.Core.dll</HintPath>
+    </Reference>
     <Reference Include="SFA.DAS.Payments.Messaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Payments.Messaging.1.1.0\lib\netstandard2.0\SFA.DAS.Payments.Messaging.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.Payments.Model.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Payments.Model.Core.1.1.0\lib\netstandard2.0\SFA.DAS.Payments.Model.Core.dll</HintPath>
+      <HintPath>..\packages\SFA.DAS.Payments.Monitoring.Jobs.Messages.0.0.14\lib\netstandard2.0\SFA.DAS.Payments.Model.Core.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.Payments.Monitoring.Jobs.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Payments.Monitoring.Jobs.Client.1.1.1\lib\netstandard2.0\SFA.DAS.Payments.Monitoring.Jobs.Client.dll</HintPath>
@@ -228,6 +231,9 @@
     </Reference>
     <Reference Include="SFA.DAS.Payments.Monitoring.Jobs.DataMessages, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Payments.Monitoring.Jobs.DataMessages.1.1.1\lib\netstandard2.0\SFA.DAS.Payments.Monitoring.Jobs.DataMessages.dll</HintPath>
+    </Reference>
+    <Reference Include="SFA.DAS.Payments.Monitoring.Jobs.Messages, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Payments.Monitoring.Jobs.Messages.0.0.14\lib\netstandard2.0\SFA.DAS.Payments.Monitoring.Jobs.Messages.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.Payments.Monitoring.Jobs.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Payments.Monitoring.Jobs.Model.1.1.1\lib\netstandard2.0\SFA.DAS.Payments.Monitoring.Jobs.Model.dll</HintPath>
@@ -385,6 +391,10 @@
     <ProjectReference Include="..\SFA.DAS.Payments.AcceptanceTests.Core\SFA.DAS.Payments.AcceptanceTests.Core.csproj">
       <Project>{0f0beb68-7f9f-4d39-b85a-3fe7701bb6cc}</Project>
       <Name>SFA.DAS.Payments.AcceptanceTests.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SFA.DAS.Payments.PeriodEnd.Application\SFA.DAS.Payments.PeriodEnd.Application.csproj">
+      <Project>{96e806eb-3afd-4302-83be-f5384a342a0d}</Project>
+      <Name>SFA.DAS.Payments.PeriodEnd.Application</Name>
     </ProjectReference>
     <ProjectReference Include="..\SFA.DAS.Payments.PeriodEnd.Messages\SFA.DAS.Payments.PeriodEnd.Messages.csproj">
       <Project>{07B3D8AE-B2C2-4B87-8256-FD1B7B55FB88}</Project>

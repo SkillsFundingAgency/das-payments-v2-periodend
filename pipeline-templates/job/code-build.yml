@@ -24,6 +24,16 @@ jobs:
       feedsToUse: 'select'
       vstsFeed: 'dct-pkg'
 
+  # task: DotNetCoreCLI@2 - src/SFA.DAS.Payments.PeriodEnd.Model/SFA.DAS.Payments.PeriodEnd.Model.csproj
+  - task: DotNetCoreCLI@2
+    displayName: Restore - src/SFA.DAS.Payments.PeriodEnd.Model/SFA.DAS.Payments.PeriodEnd.Model.csproj
+    inputs:
+      command: restore
+      projects: src/SFA.DAS.Payments.PeriodEnd.Model/SFA.DAS.Payments.PeriodEnd.Model.csproj
+      noCache: true
+      feedsToUse: 'select'
+      vstsFeed: 'dct-pkg'
+
 
   # task: NuGetCommand@2 - src/SFA.DAS.Payments.PeriodEnd.Messages/SFA.DAS.Payments.PeriodEnd.Messages.csproj
   - task: NuGetCommand@2
@@ -35,12 +45,28 @@ jobs:
       feedsToUse: 'select'
       vstsFeed: 'dct-pkg'
 
+  # task: NuGetCommand@2 - src/SFA.DAS.Payments.PeriodEnd.Model/SFA.DAS.Payments.PeriodEnd.Model.csproj
+  - task: NuGetCommand@2
+    displayName: Restore - src/SFA.DAS.Payments.PeriodEnd.Model/SFA.DAS.Payments.PeriodEnd.Model.csproj
+    inputs:
+      command: restore
+      projects: src/SFA.DAS.Payments.PeriodEnd.Model/SFA.DAS.Payments.PeriodEnd.Model.csproj
+      noCache: true
+      feedsToUse: 'select'
+      vstsFeed: 'dct-pkg'
+
 
 
   - task: DotNetCoreCLI@2
     displayName: Build
     inputs:
       projects:  src/SFA.DAS.Payments.PeriodEnd.Messages/SFA.DAS.Payments.PeriodEnd.Messages.csproj
+      arguments: '--configuration $(buildConfiguration) --no-restore'
+    
+  - task: DotNetCoreCLI@2
+    displayName: Build
+    inputs:
+      projects:  src/SFA.DAS.Payments.PeriodEnd.Model/SFA.DAS.Payments.PeriodEnd.Model.csproj
       arguments: '--configuration $(buildConfiguration) --no-restore'
 
 
@@ -50,6 +76,15 @@ jobs:
       command: publish
       publishWebProjects: false
       projects: src/SFA.DAS.Payments.PeriodEnd.Messages/SFA.DAS.Payments.PeriodEnd.Messages.csproj
+      arguments: "-o $(build.artifactstagingdirectory)/publish -c $(BuildConfiguration) --no-restore --no-build"
+      modifyOutputPath: true
+
+  - task: DotNetCoreCLI@2
+    displayName: "Publish $(SolutionBaseName)"
+    inputs:
+      command: publish
+      publishWebProjects: false
+      projects: src/SFA.DAS.Payments.PeriodEnd.Model/SFA.DAS.Payments.PeriodEnd.Model.csproj
       arguments: "-o $(build.artifactstagingdirectory)/publish -c $(BuildConfiguration) --no-restore --no-build"
       modifyOutputPath: true
 
@@ -73,4 +108,5 @@ jobs:
   - template: /azure-pipelines-templates/build/step/nuget-pack.yml
     parameters:
       DotNetStandardPackagesToPack: |
-        src/SFA.DAS.Payments.PeriodEnd.Messages/SFA.DAS.Payments.PeriodEnd.Messages.csproj
+        src/SFA.DAS.Payments.PeriodEnd.Messages/SFA.DAS.Payments.PeriodEnd.Messages.csproj;
+        src/SFA.DAS.Payments.PeriodEnd.Model/SFA.DAS.Payments.PeriodEnd.Model.csproj;
