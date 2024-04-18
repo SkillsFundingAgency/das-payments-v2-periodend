@@ -33,7 +33,7 @@ jobs:
   - task: MSBuild@1
     displayName: 'Build solution'
     inputs:
-      solution: '**/*.sln'
+      solution: 'src/SFA.DAS.Payments.PeriodEnd.sln'
       msbuildArchitecture: x64
       configuration: '$(BuildConfiguration)'
       msbuildArguments: '/p:version=$(Build.BuildNumber) /p:FileVersion=$(Build.BuildNumber)'
