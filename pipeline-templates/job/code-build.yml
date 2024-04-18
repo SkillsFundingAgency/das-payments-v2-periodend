@@ -30,6 +30,12 @@ jobs:
       feedsToUse: 'select'
       vstsFeed: 'dct-pkg'
 
+  - task: DotNetCoreCLI@2
+    displayName: Build
+    inputs:
+      projects:  ${{ parameters.TargetProjects }}
+      arguments: '--configuration $(buildConfiguration) --no-restore'
+
   - task: MSBuild@1
     displayName: 'Build solution'
     inputs:
