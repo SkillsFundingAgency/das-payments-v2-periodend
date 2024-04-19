@@ -36,18 +36,18 @@ jobs:
   #    projects:  ${{ parameters.TargetProjects }}
   #    arguments: '--configuration $(buildConfiguration) --no-restore'
 
-  #- task: MSBuild@1
-  #  displayName: 'Build solution'
-  #  inputs:
+  - task: MSBuild@1
+    displayName: 'Build solution'
+    inputs:
       #solution: 'src/SFA.DAS.Payments.PeriodEnd.sln'
-  #    msbuildArchitecture: x64
-  #    configuration: '$(BuildConfiguration)'
-  #    msbuildArguments: '/p:version=$(Build.BuildNumber) /p:FileVersion=$(Build.BuildNumber)'
-  #    maximumCpuCount: true
-  #    logProjectEvents: true
-  #    createLogFile: true
-  #    continueOnError: true
-  #    clean: true
+      msbuildArchitecture: x64
+      configuration: '$(BuildConfiguration)'
+      msbuildArguments: '/p:version=$(Build.BuildNumber) /p:FileVersion=$(Build.BuildNumber)'
+      maximumCpuCount: true
+      logProjectEvents: true
+      createLogFile: true
+      continueOnError: true
+      clean: true
 
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build UnitTest Projects'
