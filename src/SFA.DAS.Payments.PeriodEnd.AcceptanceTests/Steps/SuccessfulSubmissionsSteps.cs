@@ -2,7 +2,11 @@
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Autofac;
 using Microsoft.ServiceBus.Messaging;
+using NServiceBus;
+using SFA.DAS.Payments.AcceptanceTests.Core;
+using SFA.DAS.Payments.AcceptanceTests.Core.Data;
 using SFA.DAS.Payments.DataLocks.Messages.Events;
 using SFA.DAS.Payments.Monitoring.Jobs.DataMessages.Events;
 using SFA.DAS.Payments.PeriodEnd.AcceptanceTests.Infrastructure;

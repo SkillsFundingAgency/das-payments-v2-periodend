@@ -1,4 +1,8 @@
-﻿using NServiceBus;
+﻿using Autofac;
+using NServiceBus;
+using SFA.DAS.Payments.AcceptanceTests.Core;
+using SFA.DAS.Payments.AcceptanceTests.Core.Automation;
+using SFA.DAS.Payments.AcceptanceTests.Core.Data;
 using SFA.DAS.Payments.PeriodEnd.Messages.Events;
 using TechTalk.SpecFlow;
 
@@ -13,7 +17,6 @@ namespace SFA.DAS.Payments.PeriodEnd.AcceptanceTests.Infrastructure
             var endpointConfiguration = Container.Resolve<EndpointConfiguration>();
             endpointConfiguration.Conventions().DefiningEventsAs(type => type.IsAssignableTo<PeriodEndEvent>());
             var transportConfig = Container.Resolve<TransportExtensions<AzureServiceBusTransport>>();
-            //var routing = transportConfig.Routing();
         }
 
         [BeforeTestRun(Order = 2)]
