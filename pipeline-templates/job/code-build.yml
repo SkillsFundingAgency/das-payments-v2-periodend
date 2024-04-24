@@ -135,6 +135,6 @@ jobs:
   - task: PublishPipelineArtifact@1
     displayName: 'Publish Pipeline Artifact - Provider Adjustments'
     inputs:
-      targetPath: $(build.artifactstagingdirectory)\PeriodEnd
+      targetPath: $(build.artifactstagingdirectory)
       artifact: periodend-drop
       continueOnError: true
