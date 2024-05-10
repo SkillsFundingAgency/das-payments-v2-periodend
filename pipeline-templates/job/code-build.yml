@@ -1,16 +1,15 @@
 parameters:
   TargetProjects: 'src/**/*.csproj'
+
 jobs:
 - job: CodeBuild
   pool:
     name: DCT Build pool
   variables:
-  
   - name: SolutionBaseName
     value: SFA.DAS.Payments.PeriodEnd
   steps:
   - template: /azure-pipelines-templates/build/step/gitversion.yml
-
 
   - task: NuGetCommand@2
     displayName: Nuget Restore
@@ -30,16 +29,9 @@ jobs:
       feedsToUse: 'select'
       vstsFeed: 'dct-pkg'
 
-  #- task: DotNetCoreCLI@2
-  #  displayName: Build
-  #  inputs:
-  #    projects:  ${{ parameters.TargetProjects }}
-  #    arguments: '--configuration $(buildConfiguration) --no-restore'
-
   - task: MSBuild@1
     displayName: 'Build solution'
     inputs:
-      #solution: 'src/SFA.DAS.Payments.PeriodEnd.sln'
       msbuildArchitecture: x64
       configuration: '$(BuildConfiguration)'
       msbuildArguments: '/p:version=$(Build.BuildNumber) /p:FileVersion=$(Build.BuildNumber)'
@@ -138,3 +130,9 @@ jobs:
       targetPath: $(build.artifactstagingdirectory)
       artifact: periodend-drop
       continueOnError: true
+
+  - template: /azure-pipelines-templates/build/step/nuget-pack.yml 
+    parameters: 
+      DotNetStandardPackagesToPack: | 
+        src/SFA.DAS.Payments.PeriodEnd.Messages/SFA.DAS.Payments.PeriodEnd.Messages.csproj; 
+        src/SFA.DAS.Payments.PeriodEnd.Model/SFA.DAS.Payments.PeriodEnd.Model.csproj;
