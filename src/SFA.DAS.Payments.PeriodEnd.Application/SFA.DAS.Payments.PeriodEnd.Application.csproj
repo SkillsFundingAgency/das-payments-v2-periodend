@@ -1,12 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="ESFA.DC.JobContextManager" Version="0.2.11-beta0001" />
+<<<<<<< HEAD
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.1" />
+=======
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.32" />
+    <PackageReference Include="SFA.DAS.Payments.Application" Version="2.0.6-prerelease-13" />
+    <!--- TODO: update nuget versions-->
+    <PackageReference Include="SFA.DAS.Payments.DataLocks.Messages" Version="1.0.0" />
+    <PackageReference Include="SFA.DAS.Payments.JobContextMessageHandling" Version="0.1.27" />
+    <PackageReference Include="SFA.DAS.Payments.Monitoring.Jobs.Client" Version="1.1.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.34.0" />
+    <!--- TODO: update nuget versions-->
+>>>>>>> bbe11f5 (PV2-3207 upgrade to .net6 and match dependency versions to DataLocks)
   </ItemGroup>
 
   <ItemGroup>
