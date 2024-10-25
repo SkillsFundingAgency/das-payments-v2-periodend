@@ -31,7 +31,7 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.UnitTests
         {
             mocker = AutoMock.GetLoose();
             mocker.Mock<IEndpointInstance>()
-                .Setup(x => x.Publish(It.IsAny<object>(), It.IsAny<PublishOptions>()))
+                .Setup(x => x.Publish(It.IsAny<object>(), It.IsAny<PublishOptions>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.CompletedTask);
             mocker.Mock<IEndpointInstanceFactory>()
                 .Setup(factory => factory.GetEndpointInstance())
@@ -61,7 +61,7 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.UnitTests
                 .Verify(x => x.Publish(It.Is<PeriodEndStartedEvent>(startedEvent => startedEvent.JobId == 1
                         && startedEvent.CollectionPeriod.Period == 10
                         && startedEvent.CollectionPeriod.AcademicYear == 1819),
-                    It.IsAny<PublishOptions>()), Times.Once);
+                    It.IsAny<PublishOptions>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Test]
@@ -79,7 +79,7 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.UnitTests
 
             mocker.Mock<IEndpointInstance>()
                 .Verify(x => x.Publish(It.IsAny<PeriodEndStartedEvent>(),
-                    It.IsAny<PublishOptions>()), Times.Never);
+                    It.IsAny<PublishOptions>(), It.IsAny<CancellationToken>()), Times.Never);
         }
 
 
@@ -151,7 +151,7 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.UnitTests
                 .Verify(x => x.Publish(It.Is<PeriodEndRunningEvent>(startedEvent => startedEvent.JobId == 1
                         && startedEvent.CollectionPeriod.Period == 10
                         && startedEvent.CollectionPeriod.AcademicYear == 1819),
-                    It.IsAny<PublishOptions>()), Times.Once);
+                    It.IsAny<PublishOptions>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
 
@@ -184,7 +184,7 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.UnitTests
                 .Verify(x => x.Publish(It.Is<PeriodEndStoppedEvent>(startedEvent => startedEvent.JobId == 1
                         && startedEvent.CollectionPeriod.Period == 10
                         && startedEvent.CollectionPeriod.AcademicYear == 1819),
-                    It.IsAny<PublishOptions>()), Times.Once);
+                    It.IsAny<PublishOptions>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Test]
@@ -198,7 +198,7 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.UnitTests
                 .Verify(x => x.Publish(It.Is<PeriodEndRequestReportsEvent>(startedEvent => startedEvent.JobId == 1
                         && startedEvent.CollectionPeriod.Period == 10
                         && startedEvent.CollectionPeriod.AcademicYear == 1819),
-                    It.IsAny<PublishOptions>()), Times.Once);
+                    It.IsAny<PublishOptions>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Test]
@@ -214,7 +214,7 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.UnitTests
                         startedEvent.JobId == 1
                         && startedEvent.CollectionPeriod.Period == 10
                         && startedEvent.CollectionPeriod.AcademicYear == 1819),
-                    It.IsAny<PublishOptions>()), Times.Once);
+                    It.IsAny<PublishOptions>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
 
