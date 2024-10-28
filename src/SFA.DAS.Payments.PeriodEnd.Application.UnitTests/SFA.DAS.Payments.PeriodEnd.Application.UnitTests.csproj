@@ -11,17 +11,16 @@
     <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
     <PackageReference Include="NUnit" Version="4.2.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
-    <PackageReference Include="SFA.DAS.Payments.Application" Version="2.0.6-prerelease-13" />
+    <PackageReference Include="SFA.DAS.Payments.Application" Version="2.0.6-prerelease-21" />
     <!--- TODO: update nuget versions-->
-    <PackageReference Include="SFA.DAS.Payments.JobContextMessageHandling" Version="0.1.27" />
-    <PackageReference Include="SFA.DAS.Payments.Monitoring.Jobs.Client" Version="1.1.1" />
-    <PackageReference Include="SFA.DAS.Payments.Monitoring.Jobs.Data" Version="1.1.1" />
+    <PackageReference Include="SFA.DAS.Payments.JobContextMessageHandling" Version="2.0.1-prerelease-4" />
+    <PackageReference Include="SFA.DAS.Payments.Monitoring.Jobs.Client" Version="0.2.0-prerelease-960" />
+    <PackageReference Include="SFA.DAS.Payments.Monitoring.Jobs.Data" Version="0.2.0-prerelease-960" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.34.0" />
     <!--- TODO: update nuget versions-->
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SFA.DAS.Payments.Application\SFA.DAS.Payments.Application.csproj" />
     <ProjectReference Include="..\SFA.DAS.Payments.PeriodEnd.Application\SFA.DAS.Payments.PeriodEnd.Application.csproj" />
     <ProjectReference Include="..\SFA.DAS.Payments.PeriodEnd.Messages\SFA.DAS.Payments.PeriodEnd.Messages.csproj" />
   </ItemGroup>
