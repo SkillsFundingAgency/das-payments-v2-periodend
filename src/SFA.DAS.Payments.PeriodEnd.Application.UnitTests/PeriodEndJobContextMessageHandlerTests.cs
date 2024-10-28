@@ -419,7 +419,7 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.UnitTests
                 .Verify(x => x.Publish(It.Is<PeriodEndIlrReprocessingStartedEvent>(startedEvent => startedEvent.JobId == 1
                         && startedEvent.CollectionPeriod.Period == 10
                         && startedEvent.CollectionPeriod.AcademicYear == 1819),
-                    It.IsAny<PublishOptions>()), Times.Once);
+                    It.IsAny<PublishOptions>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Test]
@@ -437,7 +437,7 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.UnitTests
 
             mocker.Mock<IEndpointInstance>()
                 .Verify(x => x.Publish(It.IsAny<PeriodEndIlrReprocessingStartedEvent>(),
-                    It.IsAny<PublishOptions>()), Times.Never);
+                    It.IsAny<PublishOptions>(), It.IsAny<CancellationToken>()), Times.Never);
         }
 
         private static JobContextMessage CreateJobContextMessage(string task, bool CreateReturnPeriod = true,
@@ -512,7 +512,7 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.UnitTests
                 .Verify(x => x.Publish(It.Is<PeriodEndFcsHandOverCompleteEvent>(startedEvent => startedEvent.JobId == 1
                         && startedEvent.CollectionPeriod.Period == 10
                         && startedEvent.CollectionPeriod.AcademicYear == 1819),
-                    It.IsAny<PublishOptions>()), Times.Once);
+                    It.IsAny<PublishOptions>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Test]
@@ -530,7 +530,7 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.UnitTests
 
             mocker.Mock<IEndpointInstance>()
                 .Verify(x => x.Publish(It.IsAny<PeriodEndFcsHandOverCompleteEvent>(),
-                    It.IsAny<PublishOptions>()), Times.Never);
+                    It.IsAny<PublishOptions>(), It.IsAny<CancellationToken>()), Times.Never);
         }
     }
 }
