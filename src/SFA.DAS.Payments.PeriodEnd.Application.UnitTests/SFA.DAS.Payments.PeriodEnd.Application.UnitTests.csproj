@@ -12,12 +12,10 @@
     <PackageReference Include="NUnit" Version="4.2.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
     <PackageReference Include="SFA.DAS.Payments.Application" Version="2.0.6-prerelease-21" />
-    <!--- TODO: update nuget versions-->
-    <PackageReference Include="SFA.DAS.Payments.JobContextMessageHandling" Version="2.0.1-prerelease-4" />
+    <PackageReference Include="SFA.DAS.Payments.JobContextMessageHandling" Version="2.0.2-prerelease-4" />
     <PackageReference Include="SFA.DAS.Payments.Monitoring.Jobs.Client" Version="0.2.0-prerelease-960" />
     <PackageReference Include="SFA.DAS.Payments.Monitoring.Jobs.Data" Version="0.2.0-prerelease-960" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.34.0" />
-    <!--- TODO: update nuget versions-->
   </ItemGroup>
 
   <ItemGroup>
