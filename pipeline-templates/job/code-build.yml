@@ -136,4 +136,4 @@ jobs:
       DotNetStandardPackagesToPack: | 
         src/SFA.DAS.Payments.PeriodEnd.Messages/SFA.DAS.Payments.PeriodEnd.Messages.csproj; 
         src/SFA.DAS.Payments.PeriodEnd.Model/SFA.DAS.Payments.PeriodEnd.Model.csproj;
-        src/SFA.DAS.Payments.PeriodEnd.Model/SFA.DAS.Payments.PeriodEnd.Data.csproj;
+        src/SFA.DAS.Payments.PeriodEnd.Data/SFA.DAS.Payments.PeriodEnd.Data.csproj;
