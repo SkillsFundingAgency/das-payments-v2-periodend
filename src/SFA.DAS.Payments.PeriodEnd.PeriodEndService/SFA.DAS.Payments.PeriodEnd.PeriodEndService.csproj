@@ -12,18 +12,18 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="7.0.1" />
     <PackageReference Include="Autofac.ServiceFabric" Version="4.0.0" />
-    <PackageReference Include="ESFA.DC.JobContextManager" Version="0.2.11-beta0001" />
-    <PackageReference Include="ESFA.DC.Logging" Version="0.1.4-beta0001" />
+    <PackageReference Include="ESFA.DC.JobContextManager" Version="0.3.1" />
+    <PackageReference Include="ESFA.DC.Logging" Version="0.3.3-beta0001" />
     <PackageReference Include="Microsoft.ServiceFabric.Data.Interfaces" Version="7.0.1816" />
-    <PackageReference Include="SFA.DAS.Payments.Application" Version="2.0.6-prerelease-31" />
-    <PackageReference Include="SFA.DAS.Payments.DataLocks.Messages" Version="0.2.0-prerelease-47" />
-    <PackageReference Include="SFA.DAS.Payments.JobContextMessageHandling" Version="2.0.2-prerelease-4" />
-    <PackageReference Include="SFA.DAS.Payments.Messages.Common" Version="2.0.6-prerelease-31" />
-    <PackageReference Include="SFA.DAS.Payments.Messaging" Version="2.0.6-prerelease-31" />
-    <PackageReference Include="SFA.DAS.Payments.Model.Core" Version="2.0.6-prerelease-31" />
-    <PackageReference Include="SFA.DAS.Payments.Monitoring.Jobs.Client" Version="0.2.1-prerelease-939" />
-    <PackageReference Include="SFA.DAS.Payments.Monitoring.Jobs.Data" Version="0.2.1-prerelease-939" />
-    <PackageReference Include="SFA.DAS.Payments.ServiceFabric.Core" Version="2.0.4-prerelease-8" />
+    <PackageReference Include="SFA.DAS.Payments.Application" Version="2.2.2" />
+    <PackageReference Include="SFA.DAS.Payments.DataLocks.Messages" Version="0.2.3" />
+    <PackageReference Include="SFA.DAS.Payments.JobContextMessageHandling" Version="2.0.3" />
+    <PackageReference Include="SFA.DAS.Payments.Messages.Common" Version="2.2.2" />
+    <PackageReference Include="SFA.DAS.Payments.Messaging" Version="2.2.2" />
+    <PackageReference Include="SFA.DAS.Payments.Model.Core" Version="2.2.2" />
+    <PackageReference Include="SFA.DAS.Payments.Monitoring.Jobs.Client" Version="0.5.8" />
+    <PackageReference Include="SFA.DAS.Payments.Monitoring.Jobs.Data" Version="0.5.8" />
+    <PackageReference Include="SFA.DAS.Payments.ServiceFabric.Core" Version="2.0.5" />
   </ItemGroup>
 
   <ItemGroup>
