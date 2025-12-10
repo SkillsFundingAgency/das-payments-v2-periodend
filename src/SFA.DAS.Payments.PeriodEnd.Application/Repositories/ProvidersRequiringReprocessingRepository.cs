@@ -14,13 +14,6 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.Repositories
     {
         Task Remove(long ukprn);
         
-        /// <summary>
-        /// This method will add the UKPRN to the table if it does not exist and ignore the new record if
-        ///     an existing record already exists with the same UKPRN. The unique index has IGNORE_DUP_KEY
-        ///     set
-        /// </summary>
-        Task Add(long ukprn);
-
         Task<List<long>> GetAll();
 
         Task<List<LatestSuccessfulJobModel>> GetLatestSuccessfulJobs(short academicYear, byte collectionPeriod);
@@ -47,23 +40,6 @@ namespace SFA.DAS.Payments.PeriodEnd.Application.Repositories
             await dataContext.SaveChangesAsync();
 
             logger.LogInfo($"Removed UKPRN from ProviderRequiringReprocessing for ukprn: {ukprn}");
-        }
-
-        public async Task Add(long ukprn)
-        {
-            logger.LogDebug($"Adding ProviderRequiringReprocessing entity for provider: {ukprn}");
-
-            var isUkprnAlreadyAdded = await dataContext.ProvidersRequiringReprocessing.AnyAsync(x => x.Ukprn == ukprn);
-
-            if (isUkprnAlreadyAdded) return;
-            
-            var record = new ProviderRequiringReprocessingEntity
-            {
-                Ukprn = ukprn,
-            };
-            await dataContext.ProvidersRequiringReprocessing.AddAsync(record);
-            await dataContext.SaveChangesAsync();
-            logger.LogInfo($"Finished adding ProviderRequiringReprocessing entity for Ukprn: {ukprn}");
         }
 
         public async Task<List<long>> GetAll()
