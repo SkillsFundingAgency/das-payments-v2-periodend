@@ -4,7 +4,7 @@ parameters:
 jobs:
 - job: CodeBuild
   pool:
-    name: DCT Build pool
+    name: SLD Build pool - CD
   variables:
   - name: SolutionBaseName
     value: SFA.DAS.Payments.PeriodEnd
