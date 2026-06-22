@@ -4,7 +4,7 @@ parameters:
 jobs:
 - job: CodeBuild
   pool:
-    name: SLD Build pool - CD
+    name: 'windows-latest'
   variables:
   - name: SolutionBaseName
     value: SFA.DAS.Payments.PeriodEnd
