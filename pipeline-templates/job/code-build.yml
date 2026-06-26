@@ -1,5 +1,7 @@
 parameters:
-  TargetProjects: 'src/**/*.csproj'
+  TargetProjects: |
+    src/**/*.csproj
+    !src/**/*.AcceptanceTests.csproj
 
 jobs:
 - job: CodeBuild
@@ -45,6 +47,21 @@ jobs:
         --no-restore
         /p:Version=$(Build.BuildNumber)
         /p:FileVersion=$(Build.BuildNumber)
+
+  - task: NuGetCommand@2
+    displayName: 'NuGet restore legacy projects'
+    inputs:
+      command: restore
+      restoreSolution: 'src/SFA.DAS.Payments.PeriodEnd.sln'
+      feedsToUse: 'select'
+      vstsFeed: 'dct-pkg'
+
+  - task: MSBuild@1
+    displayName: 'Build acceptance tests'
+    inputs:
+      solution: 'src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj'
+      msbuildArchitecture: x64
+      configuration: '$(BuildConfiguration)'
       
 
   - task: DotNetCoreCLI@2
