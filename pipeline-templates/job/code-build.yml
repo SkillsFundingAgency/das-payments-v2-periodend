@@ -17,7 +17,14 @@ jobs:
       packageType: sdk
       version: '8.x'
 
-  
+  - task: NuGetCommand@2
+    displayName: Nuget Restore
+    inputs:
+      command: restore
+      projects: ${{ parameters.TargetProjects }}
+      noCache: true
+      feedsToUse: 'select'
+      vstsFeed: 'dct-pkg'
 
   - task: DotNetCoreCLI@2
     displayName: Dotnet Restore
