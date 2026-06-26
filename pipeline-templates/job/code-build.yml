@@ -11,14 +11,13 @@ jobs:
   steps:
   - template: /azure-pipelines-templates/build/step/gitversion.yml
 
-  - task: NuGetCommand@2
-    displayName: Nuget Restore
+  - task: UseDotNet@2
+    displayName: 'Use .NET 8 SDK'
     inputs:
-      command: restore
-      projects: ${{ parameters.TargetProjects }}
-      noCache: true
-      feedsToUse: 'select'
-      vstsFeed: 'dct-pkg'
+      packageType: sdk
+      version: '8.x'
+
+  
 
   - task: DotNetCoreCLI@2
     displayName: Dotnet Restore
@@ -29,17 +28,17 @@ jobs:
       feedsToUse: 'select'
       vstsFeed: 'dct-pkg'
 
-  - task: MSBuild@1
-    displayName: 'Build solution'
+  - task: DotNetCoreCLI@2
+    displayName: 'DotNet Build'
     inputs:
-      msbuildArchitecture: x64
-      configuration: '$(BuildConfiguration)'
-      msbuildArguments: '/p:version=$(Build.BuildNumber) /p:FileVersion=$(Build.BuildNumber)'
-      maximumCpuCount: true
-      logProjectEvents: true
-      createLogFile: true
-      continueOnError: true
-      clean: true
+      command: build
+      projects: ${{ parameters.TargetProjects }}
+      arguments: >
+        --configuration $(BuildConfiguration)
+        --no-restore
+        /p:Version=$(Build.BuildNumber)
+        /p:FileVersion=$(Build.BuildNumber)
+      
 
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build UnitTest Projects'
