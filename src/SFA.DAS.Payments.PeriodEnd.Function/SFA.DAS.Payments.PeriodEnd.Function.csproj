@@ -5,8 +5,6 @@
   </PropertyGroup>
   <ItemGroup>
 	  <PackageReference Include="AzureFunctions.Autofac" Version="4.0.1" />
-	  <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Http" Version="3.0.2" />
-	  <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.9" />
 	  <PackageReference Include="SFA.DAS.Payments.Application" Version="2.2.2" />
 	  <PackageReference Include="SFA.DAS.Payments.DataLocks.Messages" Version="0.2.3" />
 	  <PackageReference Include="SFA.DAS.Payments.Messages.Common" Version="2.2.2" />
