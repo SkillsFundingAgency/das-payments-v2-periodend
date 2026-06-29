@@ -1,5 +1,7 @@
 parameters:
-  TargetProjects: 'src/**/*.csproj'
+  TargetProjects: |
+    src/**/*.csproj
+    !src/**/*.AcceptanceTests.csproj
 
 jobs:
 - job: CodeBuild
@@ -10,6 +12,12 @@ jobs:
     value: SFA.DAS.Payments.PeriodEnd
   steps:
   - template: /azure-pipelines-templates/build/step/gitversion.yml
+
+  - task: UseDotNet@2
+    displayName: 'Use .NET 8 SDK'
+    inputs:
+      packageType: sdk
+      version: '8.x'
 
   - task: NuGetCommand@2
     displayName: Nuget Restore
@@ -29,17 +37,32 @@ jobs:
       feedsToUse: 'select'
       vstsFeed: 'dct-pkg'
 
-  - task: MSBuild@1
-    displayName: 'Build solution'
+  - task: DotNetCoreCLI@2
+    displayName: 'DotNet Build'
     inputs:
+      command: build
+      projects: ${{ parameters.TargetProjects }}
+      arguments: >
+        --configuration $(BuildConfiguration)
+        --no-restore
+        /p:Version=$(Build.BuildNumber)
+        /p:FileVersion=$(Build.BuildNumber)
+
+  - task: NuGetCommand@2
+    displayName: 'NuGet restore legacy projects'
+    inputs:
+      command: restore
+      restoreSolution: 'src/SFA.DAS.Payments.PeriodEnd.sln'
+      feedsToUse: 'select'
+      vstsFeed: 'dct-pkg'
+
+  - task: MSBuild@1
+    displayName: 'Build acceptance tests'
+    inputs:
+      solution: 'src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj'
       msbuildArchitecture: x64
       configuration: '$(BuildConfiguration)'
-      msbuildArguments: '/p:version=$(Build.BuildNumber) /p:FileVersion=$(Build.BuildNumber)'
-      maximumCpuCount: true
-      logProjectEvents: true
-      createLogFile: true
-      continueOnError: true
-      clean: true
+      
 
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build UnitTest Projects'
