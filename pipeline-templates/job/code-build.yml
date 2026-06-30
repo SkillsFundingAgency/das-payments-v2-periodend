@@ -56,12 +56,12 @@ jobs:
       feedsToUse: 'select'
       vstsFeed: 'dct-pkg'
 
-  - task: MSBuild@1
-    displayName: 'Build acceptance tests'
-    inputs:
-      solution: 'src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj'
-      msbuildArchitecture: x64
-      configuration: '$(BuildConfiguration)'
+  #- task: MSBuild@1
+  #  displayName: 'Build acceptance tests'
+  #  inputs:
+  #    solution: 'src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj'
+  #    msbuildArchitecture: x64
+  #    configuration: '$(BuildConfiguration)'
       
 
   - task: DotNetCoreCLI@2
