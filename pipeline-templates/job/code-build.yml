@@ -1,7 +1,7 @@
 parameters:
   TargetProjects: |
     src/**/*.csproj
-  # !src/**/*.AcceptanceTests.csproj
+    !src/**/*.AcceptanceTests.csproj
 
 jobs:
 - job: CodeBuild
