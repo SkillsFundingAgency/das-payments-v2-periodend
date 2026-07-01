@@ -1,5 +1,5 @@
 parameters:
-  TargetProject: 'src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj'
+  TargetProjects: 'src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj'
 
 jobs:
 - job: AcceptanceBuild
@@ -14,33 +14,28 @@ jobs:
   steps:
   - template: /azure-pipelines-templates/build/step/gitversion.yml
 
-  - task: NuGetCommand@2
-    displayName: 'NuGet restore - Acceptance project'
+  - task: UseDotNet@2
+    displayName: 'Use .NET 8 SDK'
+    inputs:
+      packageType: sdk
+      version: '8.x'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Dotnet Restore - Acceptance Project'
     inputs:
       command: restore
-      restoreSolution: 'src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj'
+      projects: ${{ parameters.TargetProjects }}
+      noCache: true
       feedsToUse: 'select'
       vstsFeed: 'dct-pkg'
-      noCache: true
 
   - task: MSBuild@1
-    displayName: 'Build - Acceptance project'
+    displayName: 'Build - Acceptance Project'
     inputs:
-      solution: 'src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj'
+      solution: ${{ parameters.TargetProjects }}
       msbuildArchitecture: x64
       configuration: '$(BuildConfiguration)'
       msbuildArguments: >
         /p:Platform="$(BuildPlatform)"
         /p:Version=$(Build.BuildNumber)
         /p:FileVersion=$(Build.BuildNumber)
-
-  # Only keep this if you actually want to run acceptance tests in CI
-  # - task: VSTest@2
-  #   displayName: 'Run Acceptance Tests'
-  #   inputs:
-  #     testSelector: 'testAssemblies'
-  #     testAssemblyVer2: |
-  #       **\*AcceptanceTests*.dll
-  #       !**\*TestAdapter.dll
-  #       !**\obj\**
-  #     searchFolder: '$(System.DefaultWorkingDirectory)'
