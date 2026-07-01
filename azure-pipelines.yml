@@ -20,6 +20,6 @@ resources:
 stages:
 - stage: Build
   jobs:
-  - template: pipeline-templates/job/code-build-acceptance.yml
-  - template: pipeline-templates/job/code-build.yml
-- template: azure-pipelines-templates/deploy/stage/nuget-publish.yml
+    - template: pipeline-templates/job/code-build-acceptance.yml
+    - template: pipeline-templates/job/code-build.yml
+    - template: azure-pipelines-templates/deploy/stage/nuget-publish.yml
