@@ -18,7 +18,7 @@ jobs:
     displayName: 'NuGet restore - Acceptance project'
     inputs:
       command: restore
-      restoreSolution: '${{ parameters.TargetProject }}'
+      restoreSolution: 'src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj'
       feedsToUse: 'select'
       vstsFeed: 'dct-pkg'
       noCache: true
@@ -26,7 +26,7 @@ jobs:
   - task: MSBuild@1
     displayName: 'Build - Acceptance project'
     inputs:
-      solution: '${{ parameters.TargetProject }}'
+      solution: 'src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj'
       msbuildArchitecture: x64
       configuration: '$(BuildConfiguration)'
       msbuildArguments: >
