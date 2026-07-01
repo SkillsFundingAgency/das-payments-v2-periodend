@@ -1,0 +1,49 @@
+parameters:
+  TargetProjects: 
+    src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj
+    
+
+jobs:
+- job: CodeBuild
+  pool:
+    name: SLD Build pool
+  variables:
+  - name: SolutionBaseName
+    value: SFA.DAS.Payments.PeriodEnd
+  steps:
+  - template: /azure-pipelines-templates/build/step/gitversion.yml
+
+  #- task: UseDotNet@2
+  #  displayName: 'Use .NET 8 SDK'
+  #  inputs:
+  #    packageType: sdk
+  #    version: '8.x'
+
+  - task: NuGetCommand@2
+    displayName: Nuget Restore - Acceptance Project
+    inputs:
+      command: restore
+      projects: ${{ parameters.TargetProjects }}
+      noCache: true
+      feedsToUse: 'select'
+      vstsFeed: 'dct-pkg'
+
+  - task: DotNetCoreCLI@2
+    displayName: Dotnet Restore - Acceptance Project
+    inputs:
+      command: restore
+      projects: ${{ parameters.TargetProjects }}
+      noCache: true
+      feedsToUse: 'select'
+      vstsFeed: 'dct-pkg'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'DotNet Build - Acceptance Project'
+    inputs:
+      command: build
+      projects: ${{ parameters.TargetProjects }}
+      arguments: >
+        --configuration $(BuildConfiguration)
+        --no-restore
+        /p:Version=$(Build.BuildNumber)
+        /p:FileVersion=$(Build.BuildNumber)
