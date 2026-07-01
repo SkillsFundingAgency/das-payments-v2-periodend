@@ -1,49 +1,46 @@
 parameters:
-  TargetProjects: 
-    src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj
-    
+  TargetProject: 'src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj'
 
 jobs:
-- job: CodeBuild
+- job: AcceptanceBuild
+  displayName: Acceptance Build
   pool:
     name: SLD Build pool
+
   variables:
   - name: SolutionBaseName
     value: SFA.DAS.Payments.PeriodEnd
+
   steps:
   - template: /azure-pipelines-templates/build/step/gitversion.yml
 
-  #- task: UseDotNet@2
-  #  displayName: 'Use .NET 8 SDK'
-  #  inputs:
-  #    packageType: sdk
-  #    version: '8.x'
-
   - task: NuGetCommand@2
-    displayName: Nuget Restore - Acceptance Project
+    displayName: 'NuGet restore - Acceptance project'
     inputs:
       command: restore
-      projects: ${{ parameters.TargetProjects }}
-      noCache: true
+      restoreSolution: '${{ parameters.TargetProject }}'
       feedsToUse: 'select'
       vstsFeed: 'dct-pkg'
-
-  - task: DotNetCoreCLI@2
-    displayName: Dotnet Restore - Acceptance Project
-    inputs:
-      command: restore
-      projects: ${{ parameters.TargetProjects }}
       noCache: true
-      feedsToUse: 'select'
-      vstsFeed: 'dct-pkg'
 
-  - task: DotNetCoreCLI@2
-    displayName: 'DotNet Build - Acceptance Project'
+  - task: MSBuild@1
+    displayName: 'Build - Acceptance project'
     inputs:
-      command: build
-      projects: ${{ parameters.TargetProjects }}
-      arguments: >
-        --configuration $(BuildConfiguration)
-        --no-restore
+      solution: '${{ parameters.TargetProject }}'
+      msbuildArchitecture: x64
+      configuration: '$(BuildConfiguration)'
+      msbuildArguments: >
+        /p:Platform="$(BuildPlatform)"
         /p:Version=$(Build.BuildNumber)
         /p:FileVersion=$(Build.BuildNumber)
+
+  # Only keep this if you actually want to run acceptance tests in CI
+  # - task: VSTest@2
+  #   displayName: 'Run Acceptance Tests'
+  #   inputs:
+  #     testSelector: 'testAssemblies'
+  #     testAssemblyVer2: |
+  #       **\*AcceptanceTests*.dll
+  #       !**\*TestAdapter.dll
+  #       !**\obj\**
+  #     searchFolder: '$(System.DefaultWorkingDirectory)'
