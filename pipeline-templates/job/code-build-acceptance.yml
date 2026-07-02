@@ -6,7 +6,7 @@ jobs:
   displayName: Acceptance Build
 
   pool:
-    name: SLD Build pool
+    name: SLD Build pool - CD
 
   variables:
   - name: SolutionBaseName
