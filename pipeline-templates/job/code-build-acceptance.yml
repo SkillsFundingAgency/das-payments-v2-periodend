@@ -20,22 +20,24 @@ jobs:
       packageType: sdk
       version: '8.x'
 
-  - task: DotNetCoreCLI@2
-    displayName: 'Dotnet Restore - Acceptance Project'
+  - task: NuGetCommand@2
+    displayName: 'NuGet restore - Acceptance packages.config'
     inputs:
       command: restore
-      projects: ${{ parameters.TargetProjects }}
-      noCache: true
+      restoreSolution: '${{ parameters.TargetProjects }}'
       feedsToUse: 'select'
       vstsFeed: 'dct-pkg'
+      noCache: true
+      restoreDirectory: 'src/packages'
 
   - task: MSBuild@1
-    displayName: 'Build - Acceptance Project'
+    displayName: 'Build - Acceptance project'
     inputs:
-      solution: ${{ parameters.TargetProjects }}
+      solution: '${{ parameters.TargetProjects }}'
       msbuildArchitecture: x64
       configuration: '$(BuildConfiguration)'
       msbuildArguments: >
         /p:Platform="AnyCPU"
+        /p:RestorePackages=false
         /p:Version=$(Build.BuildNumber)
         /p:FileVersion=$(Build.BuildNumber)
