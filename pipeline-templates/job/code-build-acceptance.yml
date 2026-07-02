@@ -30,12 +30,12 @@ jobs:
       vstsFeed: 'dct-pkg'
 
   - task: MSBuild@1
-    displayName: 'Build - Acceptance Project'
-    inputs:
-      solution: ${{ parameters.TargetProjects }}
-      msbuildArchitecture: x64
-      configuration: '$(BuildConfiguration)'
-      msbuildArguments: >
-        /p:Platform="$(BuildPlatform)"
-        /p:Version=$(Build.BuildNumber)
-        /p:FileVersion=$(Build.BuildNumber)
+  displayName: 'Build - Acceptance Project'
+  inputs:
+    solution: ${{ parameters.TargetProjects }}
+    msbuildArchitecture: x64
+    configuration: '$(BuildConfiguration)'
+    msbuildArguments: >
+      /p:Platform="AnyCPU"
+      /p:Version=$(Build.BuildNumber)
+      /p:FileVersion=$(Build.BuildNumber)
