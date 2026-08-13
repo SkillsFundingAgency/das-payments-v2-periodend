@@ -53,8 +53,8 @@ jobs:
             Scope: 'Resource Group'
             ResourceGroupName: $(ResourceGroupName)
             Environment: ${{ parameters.Environment }}
-            TemplatePath: $(Build.SourcesDirectory)/das-payments-V2/Infrastructure/SFA.DAS.Payments.PeriodEnd.Function/azure/template.json
-            ParametersPath: $(Build.SourcesDirectory)/das-payments-V2/Infrastructure/SFA.DAS.Payments.PeriodEnd.Function/azure/template.parameters.json
+            TemplatePath: $(Build.SourcesDirectory)/das-payments-v2-periodend/azure/template.json
+            ParametersPath: $(Build.SourcesDirectory)/das-payments-v2-periodend/azure/template.parameters.json
             IsMultiRepoCheckout: true
             TemplateSecrets:
               azureWebJobsStorage: $(StorageConnectionString)
