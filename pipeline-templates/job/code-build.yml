@@ -66,6 +66,27 @@ jobs:
       createLogFile: true
       continueOnError: true
 
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build - PeriodEnd Function'
+    inputs:
+      projects: src/SFA.DAS.Payments.PeriodEnd.Function/SFA.DAS.Payments.PeriodEnd.Function.csproj
+      arguments: '--configuration $(BuildConfiguration)'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet publish - PeriodEnd Function'
+    inputs:
+      command: publish
+      publishWebProjects: false
+      projects: src/SFA.DAS.Payments.PeriodEnd.Function/SFA.DAS.Payments.PeriodEnd.Function.csproj
+      arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)\PeriodEndFunction'
+      modifyOutputPath: false
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Pipeline Artifact - PeriodEnd Function'
+    inputs:
+      targetPath: '$(build.artifactstagingdirectory)\PeriodEndFunction'
+      artifact: PeriodEndFunction
+
   - task: DeleteFiles@1
     displayName: 'Delete Symbols files from Artifact Folder '
     inputs:
