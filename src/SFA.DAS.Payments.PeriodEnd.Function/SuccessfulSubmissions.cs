@@ -1,16 +1,13 @@
-using AzureFunctions.Autofac;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SFA.DAS.Payments.Application.Infrastructure.Logging;
 using SFA.DAS.Payments.PeriodEnd.Application.Services;
 using System.Threading.Tasks;
-using SFA.DAS.Payments.PeriodEnd.Function.Infrastructure.IoC;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace SFA.DAS.Payments.PeriodEnd.Function
 {
-    [DependencyInjectionConfig(typeof(DependencyRegister))]
     public static class SuccessfulSubmissions
     {
         [Function("SuccessfulSubmissions")]
