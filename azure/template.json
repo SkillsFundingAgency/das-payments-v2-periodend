@@ -57,6 +57,12 @@
       "metadata": {
         "description": "Value for the ApplicationInsightsInstrumentationKey setting read by the application"
       }
+    },
+    "applicationInsightsConnectionString": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Connection string for the Application Insights resource. Required on Flex Consumption, which has no filesystem log streaming"
+      }
     }
   },
   "variables": {
@@ -68,6 +74,10 @@
       {
         "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
         "value": "[parameters('appInsightsInstrumentationKey')]"
+      },
+      {
+        "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+        "value": "[parameters('applicationInsightsConnectionString')]"
       },
       {
         "name": "ApplicationInsightsInstrumentationKey",

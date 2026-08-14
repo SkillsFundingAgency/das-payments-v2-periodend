@@ -62,6 +62,7 @@ jobs:
               dasNServiceBusLicenseKey: $(DasNServiceBusLicenseKey)
               appInsightsInstrumentationKey: $(AppInsightsInstrumentationKey)
               applicationInsightsInstrumentationKey: $(ApplicationInsightsInstrumentationKey)
+              applicationInsightsConnectionString: $(ApplicationInsightsConnectionString)
 
         - task: AzureFunctionApp@2
           displayName: 'Azure Function App Deploy - $(FunctionAppName)'
