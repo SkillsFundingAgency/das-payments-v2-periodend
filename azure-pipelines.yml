@@ -106,41 +106,41 @@ stages:
       ArtifactName: $(ArtifactName)
       Environment: TST
 
-# - stage: Deploy_MO
-#   dependsOn: Build
-#   displayName: Deploy to MO
-#   variables:
-#   - group: MO das-payments-v2-periodendfunction
-#   jobs:
-#   - template: pipeline-templates/job/deploy.yml
-#     parameters:
-#       ServiceConnection: DCOL-MO-VSTS
-#       SolutionBaseName: ${{ variables.SolutionBaseName }}
-#       ArtifactName: $(ArtifactName)
-#       Environment: MO
+- stage: Deploy_MO
+  dependsOn: Build
+  displayName: Deploy to MO
+  variables:
+  - group: MO das-payments-v2-periodendfunction
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ServiceConnection: DCOL-MO-VSTS
+      SolutionBaseName: ${{ variables.SolutionBaseName }}
+      ArtifactName: $(ArtifactName)
+      Environment: MO
 
-# - stage: Deploy_PP
-#   dependsOn: Build
-#   displayName: Deploy to PP
-#   variables:
-#   - group: PP das-payments-v2-periodendfunction
-#   jobs:
-#   - template: pipeline-templates/job/deploy.yml
-#     parameters:
-#       ServiceConnection: DCOLPPVSTS
-#       SolutionBaseName: ${{ variables.SolutionBaseName }}
-#       ArtifactName: $(ArtifactName)
-#       Environment: PP
+- stage: Deploy_PP
+  dependsOn: Build
+  displayName: Deploy to PP
+  variables:
+  - group: PP das-payments-v2-periodendfunction
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ServiceConnection: DCOLPPVSTS
+      SolutionBaseName: ${{ variables.SolutionBaseName }}
+      ArtifactName: $(ArtifactName)
+      Environment: PP
 
-# - stage: Deploy_PD
-#   dependsOn: Build
-#   displayName: Deploy to PD
-#   variables:
-#   - group: PD das-payments-v2-periodendfunction
-#   jobs:
-#   - template: pipeline-templates/job/deploy.yml
-#     parameters:
-#       ServiceConnection: DCOLPDVSTS
-#       SolutionBaseName: ${{ variables.SolutionBaseName }}
-#       ArtifactName: $(ArtifactName)
-#       Environment: PD
+- stage: Deploy_PD
+  dependsOn: Build
+  displayName: Deploy to PD
+  variables:
+  - group: PD das-payments-v2-periodendfunction
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ServiceConnection: DCOLPDVSTS
+      SolutionBaseName: ${{ variables.SolutionBaseName }}
+      ArtifactName: $(ArtifactName)
+      Environment: PD
