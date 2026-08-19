@@ -93,6 +93,19 @@ stages:
       ArtifactName: $(ArtifactName)
       Environment: ETE
 
+- stage: Deploy_TST
+  dependsOn: Build
+  displayName: Deploy to TST
+  variables:
+  - group: TST das-payments-v2-periodendfunction
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ServiceConnection: DCT-VSO
+      SolutionBaseName: ${{ variables.SolutionBaseName }}
+      ArtifactName: $(ArtifactName)
+      Environment: TST
+
 # - stage: Deploy_MO
 #   dependsOn: Build
 #   displayName: Deploy to MO
