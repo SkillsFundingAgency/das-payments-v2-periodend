@@ -1,15 +1,23 @@
 parameters:
-  TargetProjects: 'src/**/*.csproj'
+  TargetProjects: |
+    src/**/*.csproj
+    !src/**/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj
 
 jobs:
 - job: CodeBuild
   pool:
-    name: DCT Build pool
+    name: SLD Build pool - CD
   variables:
   - name: SolutionBaseName
     value: SFA.DAS.Payments.PeriodEnd
   steps:
   - template: /azure-pipelines-templates/build/step/gitversion.yml
+
+  #- task: UseDotNet@2
+  #  displayName: 'Use .NET 8 SDK'
+  #  inputs:
+  #    packageType: sdk
+  #    version: '8.x'
 
   - task: NuGetCommand@2
     displayName: Nuget Restore
@@ -29,17 +37,32 @@ jobs:
       feedsToUse: 'select'
       vstsFeed: 'dct-pkg'
 
-  - task: MSBuild@1
-    displayName: 'Build solution'
+  - task: DotNetCoreCLI@2
+    displayName: 'DotNet Build'
     inputs:
-      msbuildArchitecture: x64
-      configuration: '$(BuildConfiguration)'
-      msbuildArguments: '/p:version=$(Build.BuildNumber) /p:FileVersion=$(Build.BuildNumber)'
-      maximumCpuCount: true
-      logProjectEvents: true
-      createLogFile: true
-      continueOnError: true
-      clean: true
+      command: build
+      projects: ${{ parameters.TargetProjects }}
+      arguments: >
+        --configuration $(BuildConfiguration)
+        --no-restore
+        /p:Version=$(Build.BuildNumber)
+        /p:FileVersion=$(Build.BuildNumber)
+
+  - task: NuGetCommand@2
+    displayName: 'NuGet restore legacy projects'
+    inputs:
+      command: restore
+      restoreSolution: 'src/SFA.DAS.Payments.PeriodEnd.sln'
+      feedsToUse: 'select'
+      vstsFeed: 'dct-pkg'
+
+  #- task: MSBuild@1
+  #  displayName: 'Build acceptance tests'
+  #  inputs:
+  #   solution: 'src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj'
+  #    msbuildArchitecture: x64
+  #    configuration: '$(BuildConfiguration)'
+      
 
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build UnitTest Projects'
@@ -65,6 +88,27 @@ jobs:
       logProjectEvents: true
       createLogFile: true
       continueOnError: true
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build - PeriodEnd Function'
+    inputs:
+      projects: src/SFA.DAS.Payments.PeriodEnd.Function/SFA.DAS.Payments.PeriodEnd.Function.csproj
+      arguments: '--configuration $(BuildConfiguration)'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet publish - PeriodEnd Function'
+    inputs:
+      command: publish
+      publishWebProjects: false
+      projects: src/SFA.DAS.Payments.PeriodEnd.Function/SFA.DAS.Payments.PeriodEnd.Function.csproj
+      arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)\PeriodEndFunction'
+      modifyOutputPath: false
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Pipeline Artifact - PeriodEnd Function'
+    inputs:
+      targetPath: '$(build.artifactstagingdirectory)\PeriodEndFunction'
+      artifact: PeriodEndFunction
 
   - task: DeleteFiles@1
     displayName: 'Delete Symbols files from Artifact Folder '
@@ -125,7 +169,7 @@ jobs:
       continueOnError: true
 
   - task: PublishPipelineArtifact@1
-    displayName: 'Publish Pipeline Artifact - Provider Adjustments'
+    displayName: 'Publish Pipeline Artifact - Period End'
     inputs:
       targetPath: $(build.artifactstagingdirectory)
       artifact: periodend-drop

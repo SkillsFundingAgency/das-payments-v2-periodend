@@ -1,0 +1,54 @@
+parameters:
+  TargetProjects: 'src/SFA.DAS.Payments.PeriodEnd.AcceptanceTests/SFA.DAS.Payments.PeriodEnd.AcceptanceTests.csproj'
+
+jobs:
+- job: AcceptanceBuild
+  displayName: Acceptance Build
+
+  pool:
+    name: SLD Build pool - CD
+
+  variables:
+  - name: SolutionBaseName
+    value: SFA.DAS.Payments.PeriodEnd
+
+  steps:
+  - template: /azure-pipelines-templates/build/step/gitversion.yml
+
+  # Install .NET 8 SDK because referenced projects target net8.0
+  - task: UseDotNet@2
+    displayName: 'Use .NET 8 SDK'
+    inputs:
+      packageType: sdk
+      version: '8.x'
+
+  # Restore packages.config packages into src\packages
+  - task: NuGetCommand@2
+    displayName: 'NuGet Restore - Acceptance'
+    inputs:
+      command: restore
+      restoreSolution: '${{ parameters.TargetProjects }}'
+      feedsToUse: 'select'
+      vstsFeed: 'dct-pkg'
+      noCache: true
+      restoreDirectory: '$(Build.SourcesDirectory)\src\packages'
+
+  # Debug step - remove once everything works
+  - powershell: |
+      Write-Host "Checking restored packages..."
+      Get-ChildItem "$(Build.SourcesDirectory)\src\packages" -ErrorAction Continue
+      Test-Path "$(Build.SourcesDirectory)\src\packages\SpecFlow.2.4.1\build\SpecFlow.targets"
+    displayName: 'Verify restored packages'
+
+  # Build acceptance project
+  - task: MSBuild@1
+    displayName: 'Build Acceptance Project'
+    inputs:
+      solution: '${{ parameters.TargetProjects }}'
+      msbuildArchitecture: 'x64'
+      configuration: '$(BuildConfiguration)'
+      msbuildArguments: >
+        /p:Platform="AnyCPU"
+        /p:RestorePackages=false
+        /p:Version=$(Build.BuildNumber)
+        /p:FileVersion=$(Build.BuildNumber)

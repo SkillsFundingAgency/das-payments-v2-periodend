@@ -1,24 +1,24 @@
-using AzureFunctions.Autofac;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
 using SFA.DAS.Payments.Application.Infrastructure.Logging;
 using SFA.DAS.Payments.PeriodEnd.Application.Services;
 using System.Threading.Tasks;
-using SFA.DAS.Payments.PeriodEnd.Function.Infrastructure.IoC;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace SFA.DAS.Payments.PeriodEnd.Function
 {
-    [DependencyInjectionConfig(typeof(DependencyRegister))]
     public static class SuccessfulSubmissions
     {
-        [FunctionName("SuccessfulSubmissions")]
+        [Function("SuccessfulSubmissions")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = "v1/PeriodEnd/Submission/Successful")] HttpRequest req,
-            [Inject] IProvidersRequiringReprocessingService providersRequiringReprocessingService,
-            [Inject] IPaymentLogger logger)
+            FunctionContext context)
         {
+            var serviceProvider = context.InstanceServices;
+            var providersRequiringReprocessingService = serviceProvider.GetRequiredService<IProvidersRequiringReprocessingService>();
+            var logger = serviceProvider.GetRequiredService<IPaymentLogger>();
+
             if (!short.TryParse(req.Query["academicYear"], out var academicYear) || 
                 !byte.TryParse(req.Query["collectionPeriod"], out var collectionPeriod))
                 return new StatusCodeResult(400);
