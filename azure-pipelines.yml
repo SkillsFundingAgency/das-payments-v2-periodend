@@ -144,3 +144,139 @@ stages:
       SolutionBaseName: ${{ variables.SolutionBaseName }}
       ArtifactName: $(ArtifactName)
       Environment: PD
+
+- stage: Deploy_DAS_Secondary
+  dependsOn: Build
+  displayName: Deploy Secondary Function to DAS
+  variables:
+  - group: DAS das-payments-v2-periodendfunction
+  - name: FunctionAppName
+    value: DCOL-$(EnvironmentName)-PeriodEndFuncSecondary1-WEU
+  - name: DeploymentContainerName
+    value: periodend-secondary-app-package
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ServiceConnection: DCT-VSO
+      SolutionBaseName: ${{ variables.SolutionBaseName }}
+      ArtifactName: $(ArtifactName)
+      Environment: DAS
+
+- stage: Deploy_DST_Secondary
+  dependsOn: Build
+  displayName: Deploy Secondary Function to DST
+  variables:
+  - group: DST das-payments-v2-periodendfunction
+  - name: FunctionAppName
+    value: DCOL-$(EnvironmentName)-PeriodEndFuncSecondary1-WEU
+  - name: DeploymentContainerName
+    value: periodend-secondary-app-package
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ServiceConnection: DCT-VSO
+      SolutionBaseName: ${{ variables.SolutionBaseName }}
+      ArtifactName: $(ArtifactName)
+      Environment: DST
+
+- stage: Deploy_SIT_Secondary
+  dependsOn: Build
+  displayName: Deploy Secondary Function to SIT
+  variables:
+  - group: SIT das-payments-v2-periodendfunction
+  - name: FunctionAppName
+    value: DCOL-$(EnvironmentName)-PeriodEndFuncSecondary1-WEU
+  - name: DeploymentContainerName
+    value: periodend-secondary-app-package
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ServiceConnection: DCT-VSO
+      SolutionBaseName: ${{ variables.SolutionBaseName }}
+      ArtifactName: $(ArtifactName)
+      Environment: SIT
+
+- stage: Deploy_ETE_Secondary
+  dependsOn: Build
+  displayName: Deploy Secondary Function to ETE
+  variables:
+  - group: ETE das-payments-v2-periodendfunction
+  - name: FunctionAppName
+    value: DCOL-$(EnvironmentName)-PeriodEndFuncSecondary1-WEU
+  - name: DeploymentContainerName
+    value: periodend-secondary-app-package
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ServiceConnection: DCT-VSO
+      SolutionBaseName: ${{ variables.SolutionBaseName }}
+      ArtifactName: $(ArtifactName)
+      Environment: ETE
+
+- stage: Deploy_TST_Secondary
+  dependsOn: Build
+  displayName: Deploy Secondary Function to TST
+  variables:
+  - group: TST das-payments-v2-periodendfunction
+  - name: FunctionAppName
+    value: DCOL-$(EnvironmentName)-PeriodEndFuncSecondary1-WEU
+  - name: DeploymentContainerName
+    value: periodend-secondary-app-package
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ServiceConnection: DCT-VSO
+      SolutionBaseName: ${{ variables.SolutionBaseName }}
+      ArtifactName: $(ArtifactName)
+      Environment: TST
+
+- stage: Deploy_MO_Secondary
+  dependsOn: Build
+  displayName: Deploy Secondary Function to MO
+  variables:
+  - group: MO das-payments-v2-periodendfunction
+  - name: FunctionAppName
+    value: DCOL-$(EnvironmentName)-PeriodEndFuncSecondary1-WEU
+  - name: DeploymentContainerName
+    value: periodend-secondary-app-package
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ServiceConnection: DCOL-MO-VSTS
+      SolutionBaseName: ${{ variables.SolutionBaseName }}
+      ArtifactName: $(ArtifactName)
+      Environment: MO
+
+- stage: Deploy_PP_Secondary
+  dependsOn: Build
+  displayName: Deploy Secondary Function to PP
+  variables:
+  - group: PP das-payments-v2-periodendfunction
+  - name: FunctionAppName
+    value: DCOL-$(EnvironmentName)-PeriodEndFuncSecondary1-WEU
+  - name: DeploymentContainerName
+    value: periodend-secondary-app-package
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ServiceConnection: DCOLPPVSTS
+      SolutionBaseName: ${{ variables.SolutionBaseName }}
+      ArtifactName: $(ArtifactName)
+      Environment: PP
+
+- stage: Deploy_PD_Secondary
+  dependsOn: Build
+  displayName: Deploy Secondary Function to PD
+  variables:
+  - group: PD das-payments-v2-periodendfunction
+  - name: FunctionAppName
+    value: DCOL-$(EnvironmentName)-PeriodEndFuncSecondary1-WEU
+  - name: DeploymentContainerName
+    value: periodend-secondary-app-package
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ServiceConnection: DCOLPDVSTS
+      SolutionBaseName: ${{ variables.SolutionBaseName }}
+      ArtifactName: $(ArtifactName)
+      Environment: PD
