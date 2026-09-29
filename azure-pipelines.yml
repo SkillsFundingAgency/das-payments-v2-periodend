@@ -93,18 +93,18 @@ stages:
       ArtifactName: $(ArtifactName)
       Environment: ETE
 
-- stage: Deploy_TST
-  dependsOn: Build
-  displayName: Deploy to TST
-  variables:
-  - group: TST das-payments-v2-periodendfunction
-  jobs:
-  - template: pipeline-templates/job/deploy.yml
-    parameters:
-      ServiceConnection: DCT-VSO
-      SolutionBaseName: ${{ variables.SolutionBaseName }}
-      ArtifactName: $(ArtifactName)
-      Environment: TST
+#- stage: Deploy_TST
+#  dependsOn: Build
+#  displayName: Deploy to TST
+#  variables:
+#  - group: TST das-payments-v2-periodendfunction
+#  jobs:
+#  - template: pipeline-templates/job/deploy.yml
+#    parameters:
+#      ServiceConnection: DCT-VSO
+#      SolutionBaseName: ${{ variables.SolutionBaseName }}
+#      ArtifactName: $(ArtifactName)
+#      Environment: TST
 
 - stage: Deploy_MO
   dependsOn: Build
@@ -213,22 +213,22 @@ stages:
       ArtifactName: $(ArtifactName)
       Environment: ETE
 
-- stage: Deploy_TST_Secondary
-  dependsOn: Build
-  displayName: Deploy Secondary Function to TST
-  variables:
-  - group: TST das-payments-v2-periodendfunction
-  - name: FunctionAppName
-    value: DCOL-$(EnvironmentName)-PeriodEndFuncSecondary1-WEU
-  - name: DeploymentContainerName
-    value: periodend-secondary-app-package
-  jobs:
-  - template: pipeline-templates/job/deploy.yml
-    parameters:
-      ServiceConnection: DCT-VSO
-      SolutionBaseName: ${{ variables.SolutionBaseName }}
-      ArtifactName: $(ArtifactName)
-      Environment: TST
+#- stage: Deploy_TST_Secondary
+#  dependsOn: Build
+#  displayName: Deploy Secondary Function to TST
+#  variables:
+#  - group: TST das-payments-v2-periodendfunction
+#  - name: FunctionAppName
+#    value: DCOL-$(EnvironmentName)-PeriodEndFuncSecondary1-WEU
+#  - name: DeploymentContainerName
+#    value: periodend-secondary-app-package
+#  jobs:
+#  - template: pipeline-templates/job/deploy.yml
+##    parameters:
+#      ServiceConnection: DCT-VSO
+#      SolutionBaseName: ${{ variables.SolutionBaseName }}
+#      ArtifactName: $(ArtifactName)
+#      Environment: TST
 
 - stage: Deploy_MO_Secondary
   dependsOn: Build
